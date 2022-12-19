@@ -1,0 +1,50 @@
+version: '3.8'
+services:
+  node18:
+    build:
+      context: .docker
+      dockerfile: node18.Dockerfile
+    image: local/node18
+    
+
+  scheduler:
+    image: local/node18:latest
+    container_name: invygo_scheduler
+    depends_on:
+      - node18
+      - mysqldb
+    volumes:
+      - './:/var/www/app'
+    restart: always
+    networks:
+      invygo:
+        ipv4_address: 172.29.0.2
+        aliases:
+          - scheduler.local
+    command: >
+      bash -c "npm install 
+      && npm run start:dev"
+
+  mysqldb:
+    container_name: invygo_mysqldb
+    restart: always
+    image: mysql:8
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - ./.docker/entrypoint/scheduler.sql:/docker-entrypoint-initdb.d/scheduler.sql
+    ports:
+      - '3306:3306'
+      - '2206:22'
+    networks:
+     invygo:
+        ipv4_address: 172.29.0.3
+        aliases:
+          - mysqldb.local
+networks:
+  invygo:
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.29.0.0/24
