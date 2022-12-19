@@ -6,39 +6,6 @@
 * [Docker Compose](https://docs.docker.com/compose/install/)
 * Git access via [ssh](https://help.github.com/en/articles/connecting-to-github-with-ssh)
 
-## Install Docker
-Choose your Operating System platform and download from https://docs.docker.com/install/#supported-platforms
-Configure any extra parameters like [docker-machine env](https://docs.docker.com/docker-for-mac/docker-toolbox/#setting-up-to-run-docker-desktop-for-mac) for docker toolbox users on mac or [linux options](https://docs.docker.com/install/linux/linux-postinstall/)
-
-## Install GIT
-```bash
-sudo apt install git
-```
-
-## Install Docker
-```bash
-sudo apt update
-sudo apt install apt-transport-https ca-certificates curl software-properties-common
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable"
-sudo apt update
-sudo apt install docker-ce
-```
-Based on this link: https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-18-04
-
-
-## Install Docker Compose
-```bash
-sudo curl -L https://github.com/docker/compose/releases/download/1.21.2/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
-sudo chmod +x /usr/local/bin/docker-compose
-docker-compose --version
-sudo usermod -a -G docker $USER
-newgrp docker
-```
-
-Based on this link: https://www.digitalocean.com/community/tutorials/how-to-install-docker-compose-on-ubuntu-18-04
-
-
 ## Install scheduler App
 ### Clone the repo and change file mode bits
 
@@ -47,6 +14,12 @@ git clone git@github.com:waelwalid/nestjs-scheduler.git
 cd nestjs-scheduler
 ./install.sh
 ```
+### App
+- App: http://172.29.0.2/
+- API: http://172.29.0.2/api/v1
+- Swagger : http://172.29.0.2/api/docs
+- Postman Collection: https://documenter.getpostman.com/view/21015452/2s8YzZRL9Q
+
 
 ### Xtra command available on install.sh
 ```bash
@@ -137,3 +110,4 @@ https://documenter.getpostman.com/view/21015452/2s8YzZRL9Q
 - [x] Use eslint code style rules
 - [x] Postman collection documentation https://documenter.getpostman.com/view/21015452/2s8YzZRL9Q
 - [x] Swagger(Open API) API Documentation http://172.29.0.2/api/docs#/
+
