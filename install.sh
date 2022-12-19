@@ -70,26 +70,27 @@ function build() {
 
 }
 
+#Moved to docker-compose entry point
 
-function create_databases() {
-    docker-compose up -d mysqldb
 
-    while :; do
-        docker exec -i mysqldb mysql -uroot -proot  <<< "ALTER USER 'root'@'localhost' IDENTIFIED WITH caching_sha2_password BY 'root'; FLUSH PRIVILEGES; SELECT user,authentication_string,plugin,host FROM mysql.user;"
-        CBCLUSTERVERIFY_DATABASE=$(echo $?)
-        echo "Waiting service into database is up. Last return: $CBCLUSTERVERIFY_DATABASE. Expected: 0"
-        if [ "$CBCLUSTERVERIFY_DATABASE" == '0' ]; then
-            QUERY_CREATE_DATABASE=""
-            for SCHEMA in "${database_local_schemas[@]}"; do
-                QUERY_CREATE_DATABASE+="CREATE DATABASE IF NOT EXISTS ${SCHEMA}; "
-            done
-            echo -e "${GREEN}Create databases${NC} \n ${QUERY_CREATE_DATABASE}"
-            docker exec mysql_database mysql --user=root --password=root -e "${QUERY_CREATE_DATABASE}" 2>/dev/null
-            break
-        fi
-        sleep 5
-    done
-}
+# function create_databases() {
+#     docker-compose up  mysqldb
+#     while :; do
+#         docker exec -i mysqldb mysql -uroot -proot  <<< "ALTER USER 'root'@'localhost' IDENTIFIED WITH caching_sha2_password BY 'root'; FLUSH PRIVILEGES; SELECT user,authentication_string,plugin,host FROM mysql.user;"
+#         CBCLUSTERVERIFY_DATABASE=$(echo $?)
+#         echo "Waiting service into database is up. Last return: $CBCLUSTERVERIFY_DATABASE. Expected: 0"
+#         if [ "$CBCLUSTERVERIFY_DATABASE" == '0' ]; then
+#             QUERY_CREATE_DATABASE=""
+#             for SCHEMA in "${database_local_schemas[@]}"; do
+#                 QUERY_CREATE_DATABASE+="CREATE DATABASE IF NOT EXISTS ${SCHEMA}; "
+#             done
+#             echo -e "${GREEN}Create databases${NC} \n ${QUERY_CREATE_DATABASE}"
+#             docker exec mysql_database mysql --user=root --password=root -e "${QUERY_CREATE_DATABASE}" 2>/dev/null
+#             break
+#         fi
+#         sleep 5
+#     done
+# }
 
 function up_dev() {
         
@@ -101,7 +102,7 @@ if [ -z $@ ]; then
     install_dependencies
     update_hosts
     build
-    create_databases
+    # create_databases
     up_dev
 fi
 
