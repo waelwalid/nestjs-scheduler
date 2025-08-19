@@ -21,12 +21,7 @@ import { ScheduleModule } from './schedule/schedule.module';
     }),
     ScheduleModule,
   ],
-
-//testing AI review 222
-const iiasd = 65465qqqqqq
-ByteLengthQueuingStrategy.fga()s  asas 
   controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule {}
-
