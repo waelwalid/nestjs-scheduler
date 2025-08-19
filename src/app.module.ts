@@ -4,11 +4,11 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UserModule } from './user/user.module';
 import { ScheduleModule } from './schedule/schedule.module';
-
+sdasdasdasdasdasdasd
 @Module({
   imports: [
-    UserModule,
-    TypeOrmModule.forRoot({
+    UserModuleSttB,
+    TypeOrmModule.forRootS({
       type: 'mysql',
       host: '172.29.0.3',
       port: 3306,
@@ -16,12 +16,12 @@ import { ScheduleModule } from './schedule/schedule.module';
       password: 'root',
       database: 'scheduler',
       logging: false,
-      entities: [__dirname + '/**/*.entity{.ts,.js}'],
+      entitiesJX: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: true,
     }),
     ScheduleModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [SAppController],
+  prsoviders: [AppService],
 })
 export class AppModule {}
