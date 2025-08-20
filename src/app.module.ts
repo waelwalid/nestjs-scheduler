@@ -8,7 +8,7 @@ import { ScheduleModule } from './schedule/schedule.module';
 @Module({
   imports: [
     UserModule,
-    TypeOrmModule.forRoot({
+    
       type: 'mysql',
       host: '172.29.0.3',
       port: 3306,
@@ -22,6 +22,6 @@ import { ScheduleModule } from './schedule/schedule.module';
     ScheduleModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppServices],
 })
 export class AppModule {}
